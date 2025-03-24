@@ -1,0 +1,36 @@
+﻿@model Products.Models.Product
+
+@{
+    ViewBag.Title = "Edit Product";
+}
+
+<h2>Edit Product</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.product_id)
+
+    <div>
+        @Html.LabelFor(model => model.product_name)
+        @Html.TextBoxFor(model => model.product_name)
+        @Html.ValidationMessageFor(model => model.product_name)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.product_quantity)
+        @Html.TextBoxFor(model => model.product_quantity)
+        @Html.ValidationMessageFor(model => model.product_quantity)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.customer_id)
+        @Html.TextBoxFor(model => model.customer_id)
+        @Html.ValidationMessageFor(model => model.customer_id)
+    </div>
+
+    <button type="submit">Save Changes</button>
+}
+
+<p>@Html.ActionLink("Back to List", "Index")</p>
+
+
