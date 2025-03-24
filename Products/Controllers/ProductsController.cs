@@ -30,14 +30,26 @@ namespace Products.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
-                db.SaveChanges();
-                TempData["Success"] = "Product created successfully!";
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Products.Add(product);
+                    db.SaveChanges();
+                    TempData["Success"] = "Product created successfully!";
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    TempData["Error"] = "An error occurred while creating the product: " + ex.Message;
+                }
             }
-            TempData["Error"] = "Failed to create product.";
+            else
+            {
+                TempData["Error"] = "Failed to create product. Please check the input.";
+            }
+
             return View(product);
         }
+
 
 
         [HttpGet]
@@ -58,9 +70,16 @@ namespace Products.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Entry(product).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch(Exception ex)
+                {
+                    TempData["Error"] = "An error occurred while editing the product: " + ex.Message;
+                }
             }
             return View(product);
         }
@@ -83,9 +102,24 @@ namespace Products.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            var product = db.Products.Find(id);
-            db.Products.Remove(product);
-            db.SaveChanges();
+            try
+            {
+                var product = db.Products.Find(id);
+                if (product == null)
+                {
+                    TempData["Error"] = "Product not found.";
+                    return RedirectToAction("Index");
+                }
+
+                db.Products.Remove(product);
+                db.SaveChanges();
+                TempData["Success"] = "Product deleted successfully!";
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "An error occurred while deleting the product: " + ex.Message;
+            }
+
             return RedirectToAction("Index");
         }
     }

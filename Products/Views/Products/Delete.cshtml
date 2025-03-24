@@ -4,6 +4,15 @@
     ViewBag.Title = "Delete Product";
 }
 
+@if (TempData["Success"] != null)
+{
+    <div style="color: green">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div style="color: red">@TempData["Error"]</div>
+}
+
 <h2>Delete Product</h2>
 
 <h3>Are you sure you want to delete this product?</h3>

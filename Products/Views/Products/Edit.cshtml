@@ -4,6 +4,15 @@
     ViewBag.Title = "Edit Product";
 }
 
+@if (TempData["Success"] != null)
+{
+    <div style="color: green">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div style="color: red">@TempData["Error"]</div>
+}
+
 <h2>Edit Product</h2>
 
 @using (Html.BeginForm())
