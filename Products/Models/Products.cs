@@ -19,11 +19,9 @@ namespace Products.Models
         [Required]
         public string product_name { get; set; }
 
-        // Foreign key
         [ForeignKey("Customer")]
         public int customer_id { get; set; }
 
-        // Navigation property
         public virtual Customer Customer { get; set; }
 
 
