@@ -7,25 +7,23 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Products.Models
 {
-    public class Product
+    public class Services
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int product_id { get; set; }
+        public int service_id { get; set; }
 
         [Required]
-        public int product_quantity { get; set; }
+        public string service_name { get; set; }
+
+        public string service_description { get; set; }
 
         [Required]
-        public string product_name { get; set; }
+        public int service_price { get; set; }
 
-        // Foreign key
         [ForeignKey("Customer")]
         public int customer_id { get; set; }
 
-        // Navigation property
         public virtual Customer Customer { get; set; }
-
-
     }
 }
