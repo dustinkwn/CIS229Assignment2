@@ -23,7 +23,5 @@ namespace Products.Models
         public int customer_id { get; set; }
 
         public virtual Customer Customer { get; set; }
-
-
     }
 }
